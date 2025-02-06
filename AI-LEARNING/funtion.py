@@ -7,6 +7,7 @@ def loadtxt(path_to_file, sign):
         x[:, 0] = 1
         x[:,1:] = raw_data[:,:-1]
         y = raw_data[:,-1]
+        return x, y, raw_data
     except:
         return 0
 def savetxt(path_to_file, matrix, sign):
@@ -33,8 +34,7 @@ def compute_cost_vector(X,y,Theta):
 def gradient_descent(X, y, theta, learning_rate, iterations):
     m = len(y)
     cost_history = np.zeros(iterations)
-    theta_history = np.zeros((iterations, 2))
-
+    theta_history = np.zeros((iterations, np.size(X, 1)))
     for i in range(iterations):
         printProgressBar(i,iterations)
         time.sleep(0.0003)
@@ -61,6 +61,8 @@ def gradient_descent_handmade(X,y,theta, learning_rate, iterations):
     
     return theta, cost_history, theta_history
         
+def normal_equation(X, y):
+    return np.linalg.pinv(np.transpose(X)@X)@(np.transpose(X)@y)
 
 def printProgressBar (iteration, total, suffix = ''):
     percent = ("{0:." + str(1) + "f}").format(100 * ((iteration+1) / float(total)))
@@ -68,14 +70,15 @@ def printProgressBar (iteration, total, suffix = ''):
     bar = '=' * filledLength + '-' * (50- filledLength)
     print('\rTraining: |%s| %s%%' % (bar, percent), end = '\r')
     # Print New Line on Complete
-    if iteration == total: 
+    if(percent==iteration):
         print()
 
 def normalize(x):
     n = np.copy(x)
     n[0,0] = 100
-    s = np.std(n, 0, dtype = np.float16)
-    n=n/s
+    s = np.std(n, 0, dtype = np.float64)
+    mu = np.mean(x, 0)
+    n=(n-mu)/s
     n[:,0]=1
     return n
 
