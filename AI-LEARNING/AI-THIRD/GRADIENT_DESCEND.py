@@ -5,15 +5,17 @@ sys.path.append("/run/media/trung/hdddrive/CODE/python-learning/AI-LEARNING")
 from funtion import *
 
 raw_data= np.loadtxt("/run/media/trung/hdddrive/CODE/python-learning/AI-LEARNING/AI-THIRD/data.txt", delimiter=',')
+np.random.shuffle(raw_data)
 y = np.copy(raw_data[:,1])
 X = np.copy(raw_data)
 X[:,1] = X[:,0]
 X[:,0] = 1
+X = normalize(X)
 theta = np.zeros(np.size(raw_data, 1))
 print(theta)
 learning_rate = 0.01
-iteration = 15000
-theta,cost,theta_history = gradient_descent_handmade(X, y, theta, learning_rate, iteration)
+iteration = 2000
+theta,cost,theta_history = gradient_descent(X, y, theta, learning_rate, iteration)
 
 def linear_regression(x,theta):
     predict = x@theta
@@ -43,4 +45,4 @@ def linear_regression(x,theta):
     plt.ylabel("Giá trị Theta")
     plt.legend()
     plt.show()
-#linear_regression(X, theta)
+linear_regression(X, theta)

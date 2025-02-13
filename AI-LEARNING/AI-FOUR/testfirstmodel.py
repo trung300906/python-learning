@@ -9,14 +9,15 @@ import plotly.graph_objects as go
 
 def linear_regression_multivarite():
     x, y, raw_data=loadtxt('/run/media/trung/hdddrive/CODE/python-learning/AI-LEARNING/AI-FOUR/data.txt',',')
-    thetaa=normal_equation(x,y)
+    np.random.shuffle(raw_data)
+    # thetaa=normal_equation(x,y)
     print(thetaa)
     Theta = np.zeros(np.size(raw_data,1))
     x = normalize(x)
     iterations=2000
     Theta, cost_history, theta_history = gradient_descent(x,y, Theta ,learning_rate=0.1, iterations=2000)
     print(Theta)
-    predict = predict_function(x, thetaa)
+    predict = predict_function(x, Theta)
     X = raw_data[:, 0]
     Y = raw_data[:, 1]
     Z = predict

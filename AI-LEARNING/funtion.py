@@ -82,3 +82,29 @@ def normalize(x):
     n[:,0]=1
     return n
 
+def adam_optimizer(f_grad, x_init, learning_rate=0.01, beta1=0.9, beta2=0.999, epsilon=1e-8, max_iter=1000):
+    """
+    Adam optimizer từ đầu.
+    f_grad: Hàm trả về gradient của f(x)
+    x_init: Điểm khởi tạo
+    learning_rate: Tốc độ học
+    beta1, beta2: Hệ số trung bình động
+    epsilon: Hằng số tránh chia cho 0
+    max_iter: Số vòng lặp tối đa
+    """
+    x = x_init
+    m, v = 0, 0  # Khởi tạo moment bậc 1 và 2
+    t = 0        # Đếm số bước
+    
+    for t in range(1, max_iter + 1):
+        grad = f_grad(x)  # Tính gradient
+        
+        m = beta1 * m + (1 - beta1) * grad  # Cập nhật moment bậc 1
+        v = beta2 * v + (1 - beta2) * (grad ** 2)  # Cập nhật moment bậc 2
+        
+        m_hat = m / (1 - beta1 ** t)  # Hiệu chỉnh bias moment bậc 1
+        v_hat = v / (1 - beta2 ** t)  # Hiệu chỉnh bias moment bậc 2
+        
+        x = x - learning_rate * m_hat / (np.sqrt(v_hat) + epsilon)  # Cập nhật tham số
+        
+    return x
