@@ -9,9 +9,8 @@ import plotly.graph_objects as go
 
 def linear_regression_multivarite():
     x, y, raw_data=loadtxt('/run/media/trung/hdddrive/CODE/python-learning/AI-LEARNING/AI-FOUR/data.txt',',')
-    np.random.shuffle(raw_data)
+    #np.random.shuffle(raw_data)
     # thetaa=normal_equation(x,y)
-    print(thetaa)
     Theta = np.zeros(np.size(raw_data,1))
     x = normalize(x)
     iterations=2000
