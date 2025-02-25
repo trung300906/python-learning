@@ -1,6 +1,6 @@
 import numpy as np
 import sys
-sys.path.append("/run/media/trung/hdddrive/CODE/python-learning/AI-LEARNING")
+sys.path.append("/run/media/trung/hdddrive/CODE/python-learning/AI-LEARNING/LINEAR_REGRESSION")
 import time
 from funtion import *
 import matplotlib.pyplot as plt
@@ -8,7 +8,7 @@ from mpl_toolkits.mplot3d import axes3d
 import plotly.graph_objects as go
 
 def linear_regression_multivarite():
-    x, y, raw_data=loadtxt('/run/media/trung/hdddrive/CODE/python-learning/AI-LEARNING/AI-FOUR/data.txt',',')
+    x, y, raw_data=loadtxt('/run/media/trung/hdddrive/CODE/python-learning/AI-LEARNING/LINEAR_REGRESSION/AI-FOUR/data.txt',',')
     #np.random.shuffle(raw_data)
     # thetaa=normal_equation(x,y)
     Theta = np.zeros(np.size(raw_data,1))
