@@ -12,6 +12,7 @@ def linear_regression_multivarite():
     #np.random.shuffle(raw_data)
     # thetaa=normal_equation(x,y)
     Theta = np.zeros(np.size(raw_data,1))
+    print(Theta)
     x = normalize(x)
     iterations=2000
     Theta, cost_history, theta_history = gradient_descent(x,y, Theta ,learning_rate=0.1, iterations=2000)
